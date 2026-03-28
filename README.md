@@ -2,6 +2,10 @@
 
 Hello world monorepo using React, FastAPI, and PostgreSQL with Docker Compose.
 
+## Prerequisites
+
+- Docker Desktop installed and running
+
 ## Stack
 
 - `frontend/`: React + Vite
@@ -10,8 +14,17 @@ Hello world monorepo using React, FastAPI, and PostgreSQL with Docker Compose.
 
 ## First-time setup
 
+### Windows PowerShell
+
 ```bash
 copy .env.example .env
+docker compose up --build
+```
+
+### macOS / Linux
+
+```bash
+cp .env.example .env
 docker compose up --build
 ```
 
@@ -26,6 +39,7 @@ Then open:
 - frontend changes reload through Vite
 - backend changes reload through `uvicorn --reload`
 - `docker compose down` stops everything
+- `docker compose down -v` stops everything and resets the Postgres volume
 
 ## Helpful commands
 
@@ -34,6 +48,11 @@ docker compose logs -f
 docker compose down -v
 docker compose up --build
 ```
+
+## Tests
+
+- Backend: `docker compose exec backend pytest`
+- Frontend: `docker compose exec frontend npm test`
 
 ## What this starter proves
 
@@ -46,3 +65,4 @@ docker compose up --build
 
 - Use `.env.example` as the shared template and keep real values in `.env`
 - The frontend container keeps `node_modules` in a Docker volume so bind mounts do not wipe dependencies
+- The same Docker Compose setup works on Windows and macOS as long as Docker is running
